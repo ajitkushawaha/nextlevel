@@ -30,9 +30,6 @@ const configCloudinary = async () => {
   }
 }
 
-// Initialize Cloudinary configuration
-configCloudinary()
-
 export default cloudinary
 
 // Helper function to upload image to Cloudinary
@@ -74,6 +71,7 @@ export const uploadImage = async (
 // Helper function to delete image from Cloudinary
 export const deleteImage = async (publicId: string) => {
   try {
+    await configCloudinary()
     await cloudinary.uploader.destroy(publicId)
   } catch (error) {
     console.error('Cloudinary delete error:', error)
